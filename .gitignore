@@ -24,4 +24,4 @@ Homestead.json
 
 
 # exclude bower component
-public/bower_components
+public/bower_components/
