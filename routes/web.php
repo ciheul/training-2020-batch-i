@@ -2,7 +2,7 @@
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('chap2/task/list');
 });
 
 
