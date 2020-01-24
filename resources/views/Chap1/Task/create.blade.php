@@ -5,8 +5,7 @@
     <div class="ui stackable one column grid">
       <div class="column">
         <h3 class="ui block header">Task List</h3>
-        <form action="{{ route('chap1.task.post') }}" method="POST">
-          {{ csrf_field() }}
+        <form method="POST">
 
           <div class="form-row">
           <div class="card-body">
@@ -21,7 +20,7 @@
             <div class="ui buttons right floated">
               <a href="/chap1/task/list" class=" ui negative button">Cancel</a>
               <div class="or"></div>
-              <button  class="ui positive button">Save</button>
+              <button  class="ui positive button btn-submit">Save</button>
             </div>
           </div>
           </div>
