@@ -36856,6 +36856,541 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/Chap2/Datatable/create.js":
+/*!************************************************!*\
+  !*** ./resources/js/Chap2/Datatable/create.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataTableCreate; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var DataTableCreate =
+/*#__PURE__*/
+function () {
+  function DataTableCreate() {
+    _classCallCheck(this, DataTableCreate);
+
+    this.bindButton();
+  }
+
+  _createClass(DataTableCreate, [{
+    key: "bindButton",
+    value: function bindButton() {
+      $(".btn-submit-create").click(function (e) {
+        e.preventDefault();
+        var title = $("input[name=title]").val();
+        var body = $("#body").val();
+        var status = $("#status").val();
+        console.log('ini create');
+        $.ajax({
+          type: 'POST',
+          url: '/api/chap2/task/apis',
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: {
+            title: title,
+            body: body,
+            status: status
+          },
+          success: function success(data) {
+            // alert(data.success);
+            window.location.href = "/chap2/task?created";
+          }
+        });
+      });
+    }
+  }]);
+
+  return DataTableCreate;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Chap2/Datatable/delete.js":
+/*!************************************************!*\
+  !*** ./resources/js/Chap2/Datatable/delete.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataTableDelete; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var DataTableDelete =
+/*#__PURE__*/
+function () {
+  function DataTableDelete() {
+    _classCallCheck(this, DataTableDelete);
+
+    this.btnDelete();
+  }
+
+  _createClass(DataTableDelete, [{
+    key: "btnDelete",
+    value: function btnDelete() {
+      var menu = window.location.pathname.split("/").pop();
+      $(document).on('click', '.btn-delete', function (e) {
+        var id = $(this).data('id');
+        console.log(id);
+        $.ajax({
+          type: 'DELETE',
+          url: '/api/chap2/task/apis/' + id + "/delete",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: {
+            id: id
+          },
+          success: function success(response) {
+            window.location.href = "/chap2/task?deleted";
+          },
+          error: function error() {
+            alert('data tidak ditermukan');
+          }
+        });
+      });
+    }
+  }]);
+
+  return DataTableDelete;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Chap2/Datatable/detail.js":
+/*!************************************************!*\
+  !*** ./resources/js/Chap2/Datatable/detail.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataTableDetail; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var DataTableDetail =
+/*#__PURE__*/
+function () {
+  function DataTableDetail() {
+    _classCallCheck(this, DataTableDetail);
+
+    this.getDetail();
+  }
+
+  _createClass(DataTableDetail, [{
+    key: "getDetail",
+    value: function getDetail() {
+      $(document).ready(function (e) {
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        var id = $('#task_id').val();
+        var menu = window.location.pathname.split("/").pop();
+        $.ajax({
+          url: "/api/chap2/task/apis" + '/' + id,
+          type: "GET",
+          dataType: "JSON",
+          success: function success(response) {
+            $('.data-title').text(response.data.title);
+            $('.data-title').val(response.data.title);
+            $('.data-body').text(response.data.body); // $('.data-status').text(response.data.status);
+
+            $('#status').val(response.data.status);
+          },
+          error: function error() {
+            alert('data tidak ditermukan');
+          }
+        });
+      });
+    }
+  }]);
+
+  return DataTableDetail;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Chap2/Datatable/get.js":
+/*!*********************************************!*\
+  !*** ./resources/js/Chap2/Datatable/get.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataTableGet; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var DataTableGet =
+/*#__PURE__*/
+function () {
+  function DataTableGet() {
+    _classCallCheck(this, DataTableGet);
+
+    this.getDataList();
+    this.rangeDate();
+  }
+
+  _createClass(DataTableGet, [{
+    key: "getDataList",
+    value: function getDataList() {
+      $(function (e) {
+        //variable
+        var title = $('#title').val();
+        var status = $('#status').val();
+        var body = $('#body').val();
+        var limit = $('#sortByRow').val();
+        var page;
+        var to_date;
+        var from_date;
+        var params; // let first_page;
+
+        var path;
+        var current_page;
+        var last_page_url;
+        var prev_page_url;
+        var paramsList; // let total;
+
+        function extraparams(title, status, body, limit, from_date, to_date) {
+          var currentUrl = window.location.href;
+
+          if (currentUrl.indexOf('?') < 0) {
+            return {};
+          }
+
+          currentUrl = currentUrl.replace('#', '');
+          paramsList = currentUrl.split('?')[1].split('&'); //cek parameter
+          // console.log(paramsList);
+
+          var page = paramsList[0].split('=')[1];
+
+          if (title == undefined) {
+            var title = paramsList[1].split('=')[1];
+          }
+
+          var params = {};
+        }
+
+        function inputData() {
+          // input title untuk filter
+          $(document).on('keyup', '#title', function (e) {
+            if ($('#title').is(":focus") && event.key == "Enter") {
+              title = $('#title').val();
+              $('#data-table-task').DataTable().destroy();
+              show_datatable(title, status, body, limit, from_date, to_date);
+              extraparams(title, status, body, limit, from_date, to_date);
+            }
+          }); // input title untuk filter
+
+          $(document).on('keyup', '#body', function (e) {
+            if ($('#body').is(":focus") && event.key == "Enter") {
+              body = $('#body').val();
+              $('#data-table-task').DataTable().destroy();
+              show_datatable(title, status, body, limit, from_date, to_date);
+              extraparams(title, status, body, limit, from_date, to_date);
+            }
+          }); //input status untuk filter
+
+          $(document).on('change', '#status', function (e) {
+            status = $('#status').val();
+            $('#data-table-task').DataTable().destroy();
+            show_datatable(title, status, body, limit, from_date, to_date);
+            extraparams(title, status, body, limit, from_date, to_date);
+          }); //filter limit
+
+          $(document).on('change', '#sortByRow', function (e) {
+            limit = $('#sortByRow').val();
+            $('#data-table-task').DataTable().destroy();
+            show_datatable(title, status, body, limit, from_date, to_date);
+            extraparams(title, status, body, limit, from_date, to_date);
+          }); //filter  data tanggal
+
+          $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD') + ' s/d ' + picker.endDate.format('YYYY-MM-DD'));
+            from_date = picker.startDate.format('YYYY-MM-DD');
+            to_date = picker.endDate.format('YYYY-MM-DD');
+            $('#data-table-task').DataTable().destroy();
+            show_datatable(title, status, body, limit, from_date, to_date);
+            extraparams(title, status, body, limit, from_date, to_date);
+          }); //filter data tanggal clear
+
+          $('input[name="datefilter"]').on('cancel.daterangepicker', function (ev, picker) {
+            $(this).val('');
+            from_date = '';
+            to_date = '';
+            $('#data-table-task').DataTable().destroy();
+            show_datatable(title, status, body, limit, from_date, to_date);
+          }); // btn prev paginate
+
+          $(document).on('click', ".paginate_button .previous", function (e) {// console.log('a')
+          });
+        }
+
+        show_datatable(title, status, body, limit, from_date, to_date);
+        inputData();
+        extraparams(); //fungsi tampil data
+
+        function show_datatable() {
+          var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+          var status = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+          var body = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+          var limit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '50';
+          var from_date = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+          var to_date = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : '';
+          $.ajax({
+            url: "/api/chap2/task/apis",
+            type: "GET",
+            dataType: "JSON",
+            data: {
+              title: title,
+              status: status,
+              body: body,
+              limit: limit,
+              from_date: from_date,
+              to_date: to_date
+            },
+            success: function success(data) {
+              params = this.url;
+              var path = params.split('?'); // cek data page
+
+              current_page = data.current_page;
+              last_page_url = data.last_page_url;
+              prev_page_url = data.prev_page_url; //push url
+
+              window.history.pushState({
+                "html": ""
+              }, "", "/chap2/task?" + path[1]); // console.log(path);
+            },
+            error: function error() {
+              alert('data tidak ditermukan');
+            }
+          });
+          $('#data-table-task').DataTable({
+            "ajax": {
+              url: "/api/chap2/task/apis/",
+              data: {
+                page: 1,
+                title: title,
+                status: status,
+                body: body,
+                limit: limit,
+                from_date: from_date,
+                to_date: to_date
+              },
+              complete: function complete(params) {}
+            },
+            pageLength: 50,
+            scrollX: false,
+            scrollCollapse: false,
+            paging: true,
+            searching: false,
+            orderable: false,
+            bSort: false,
+            info: false,
+            lengthChange: false,
+            retrieve: true,
+            columns: [{
+              data: "id"
+            }, {
+              data: "title"
+            }, {
+              data: "body"
+            }, {
+              data: "created_at"
+            }, {
+              data: "status"
+            }, {
+              data: "id",
+              "className": "dt-center",
+              "render": function render(data) {
+                return '<a href="/chap2/task/' + data + '/detail">' + '<div class="ui vertical animated blue button view-task" >' + '<div class="hidden content">View</div>' + '<div class="visible content">' + '<i class="eye icon"></i></div>' + '</div>' + '</a>' + '<a href="/chap2/task/' + data + '/edit">' + '<div class="ui vertical animated yellow button">' + '<div class="hidden content">Edit</div>' + '<div class="visible content">' + '<i class="edit icon"></i>' + '</div>' + '</div>' + '</a>' + '<a class="btn-delete" data-id="' + data + '">' + '<div class="ui vertical animated orange button" >' + '<div class="hidden content">Delete</div>' + '<div class="visible content">' + '<i class="trash icon"></i>' + '</div>' + '</div>' + '</a>';
+              }
+            }]
+          });
+        }
+      });
+    }
+  }, {
+    key: "rangeDate",
+    value: function rangeDate() {
+      $(function () {
+        $('input[name="datefilter"]').daterangepicker({
+          autoUpdateInput: false,
+          locale: {
+            cancelLabel: 'Clear'
+          }
+        });
+      });
+    }
+  }]);
+
+  return DataTableGet;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Chap2/Datatable/notif.js":
+/*!***********************************************!*\
+  !*** ./resources/js/Chap2/Datatable/notif.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DatatableNotif; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var DatatableNotif =
+/*#__PURE__*/
+function () {
+  function DatatableNotif() {
+    _classCallCheck(this, DatatableNotif);
+
+    this.defaultAlert();
+    this.exitAlert();
+    this.setAlert();
+  }
+
+  _createClass(DatatableNotif, [{
+    key: "defaultAlert",
+    value: function defaultAlert() {
+      $('.message').hide();
+    }
+  }, {
+    key: "exitAlert",
+    value: function exitAlert() {
+      $(".close.icon").click(function () {
+        $(this).parent().hide();
+      });
+    }
+  }, {
+    key: "setAlert",
+    value: function setAlert() {
+      var params_alert = window.location.href.split('?');
+
+      if (params_alert[1] == 'deleted') {
+        $('.deleted').show();
+      }
+
+      if (params_alert[1] == 'updated') {
+        $('.updated').show();
+      }
+
+      if (params_alert[1] == 'created') {
+        $('.created').show();
+      }
+    }
+  }]);
+
+  return DatatableNotif;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Chap2/Datatable/update.js":
+/*!************************************************!*\
+  !*** ./resources/js/Chap2/Datatable/update.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataTableUpdate; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var DataTableUpdate =
+/*#__PURE__*/
+function () {
+  function DataTableUpdate() {
+    _classCallCheck(this, DataTableUpdate);
+
+    this.putUpdate();
+  }
+
+  _createClass(DataTableUpdate, [{
+    key: "putUpdate",
+    value: function putUpdate() {
+      $('.btn-submit-edit').click(function (e) {
+        e.preventDefault();
+        var id = $("input[name=id]").val();
+        var title = $("input[name=title]").val();
+        var body = $(".data-body").val();
+        var status = $("#status").val(); // console.log(id);
+
+        $.ajax({
+          type: 'PUT',
+          url: '/api/chap2/task/apis/' + id + "/update",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: {
+            id: id,
+            title: title,
+            body: body,
+            status: status
+          },
+          success: function success(response) {
+            window.location.href = "/chap2/task?updated";
+          }
+        });
+      });
+    }
+  }]);
+
+  return DataTableUpdate;
+}();
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Chap2/Task/add.js":
 /*!****************************************!*\
   !*** ./resources/js/Chap2/Task/add.js ***!
@@ -36889,9 +37424,10 @@ function () {
         var title = $("input[name=title]").val();
         var body = $("#body").val();
         var status = $("#status").val();
+        console.log('ini create');
         $.ajax({
           type: 'POST',
-          url: '/chap2/task/apis',
+          url: '/api/chap2/task/apis',
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
@@ -36901,8 +37437,8 @@ function () {
             status: status
           },
           success: function success(data) {
-            // alert(data.success);
-            window.location.href = "/chap2/task/list?created";
+            alert(data.success);
+            window.location.href = "/chap2/task?created";
           }
         });
       });
@@ -36982,11 +37518,14 @@ function () {
       var params_alert = window.location.href.split('?');
 
       if (params_alert[1] == 'deleted') {
-        // console.log(params_alert[1])
         $('.deleted').show();
-      } else if (params_alert[1] == 'updated') {
+      }
+
+      if (params_alert[1] == 'updated') {
         $('.updated').show();
-      } else if (params_alert[1] == 'created') {
+      }
+
+      if (params_alert[1] == 'created') {
         $('.created').show();
       }
     }
@@ -37026,28 +37565,23 @@ function () {
 
   _createClass(TaskDelete, [{
     key: "bindButton",
-    value: function bindButton() {
-      $(".btn-delete").click(function (e) {
-        e.preventDefault();
-        var id = $(this).data("id");
-        console.log(id);
-        $.ajax({
-          type: 'DELETE',
-          url: '/chap2/task/apis/' + id,
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          data: {
-            id: id
-          },
-          success: function success(data) {
-            window.location.href = "/chap2/task/list?deleted";
-          },
-          error: function error() {
-            console.log('error');
-          }
-        });
-      });
+    value: function bindButton() {// $(".btn-delete").click(function(e){
+      //     e.preventDefault();
+      //     let id = $(this).data("id");
+      //     console.log(id);
+      //     $.ajax({
+      //         type:'DELETE',
+      //         url:'/chap2/task/apis/' + id,
+      //         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      //         data: {id:id},
+      //         success: function(data){
+      //           window.location.href = "/chap2/task?deleted";
+      //         },
+      //         error: function(){
+      //             console.log('error');
+      //         }
+      //     });
+      // });
     }
   }]);
 
@@ -37112,7 +37646,7 @@ function () {
             // $('.message').show()
             // $('.message').append(data.success);
             // $(".close.icon").click(function(){
-            window.location.href = "/chap2/task/list?updated"; // });
+            window.location.href = "/chap2/task?updated"; // });
           }
         });
       });
@@ -37217,12 +37751,24 @@ function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Chap2_Task_add__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Chap2/Task/add */ "./resources/js/Chap2/Task/add.js");
-/* harmony import */ var _Chap2_Task_delete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Chap2/Task/delete */ "./resources/js/Chap2/Task/delete.js");
-/* harmony import */ var _Chap2_Task_view__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Chap2/Task/view */ "./resources/js/Chap2/Task/view.js");
-/* harmony import */ var _Chap2_Task_update__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Chap2/Task/update */ "./resources/js/Chap2/Task/update.js");
-/* harmony import */ var _Chap2_Task_alert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Chap2/Task/alert */ "./resources/js/Chap2/Task/alert.js");
+/* harmony import */ var _Chap2_Datatable_create__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Chap2/Datatable/create */ "./resources/js/Chap2/Datatable/create.js");
+/* harmony import */ var _Chap2_Datatable_detail__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Chap2/Datatable/detail */ "./resources/js/Chap2/Datatable/detail.js");
+/* harmony import */ var _Chap2_Datatable_delete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Chap2/Datatable/delete */ "./resources/js/Chap2/Datatable/delete.js");
+/* harmony import */ var _Chap2_Datatable_get__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Chap2/Datatable/get */ "./resources/js/Chap2/Datatable/get.js");
+/* harmony import */ var _Chap2_Datatable_notif__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Chap2/Datatable/notif */ "./resources/js/Chap2/Datatable/notif.js");
+/* harmony import */ var _Chap2_Datatable_update__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Chap2/Datatable/update */ "./resources/js/Chap2/Datatable/update.js");
+/* harmony import */ var _Chap2_Task_alert__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Chap2/Task/alert */ "./resources/js/Chap2/Task/alert.js");
+/* harmony import */ var _Chap2_Task_add__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Chap2/Task/add */ "./resources/js/Chap2/Task/add.js");
+/* harmony import */ var _Chap2_Task_delete__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Chap2/Task/delete */ "./resources/js/Chap2/Task/delete.js");
+/* harmony import */ var _Chap2_Task_update__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Chap2/Task/update */ "./resources/js/Chap2/Task/update.js");
+/* harmony import */ var _Chap2_Task_view__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Chap2/Task/view */ "./resources/js/Chap2/Task/view.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+
+
+
+
+
 
 
 
@@ -37233,21 +37779,28 @@ var menu = window.location.pathname.split("/").pop();
 
 switch (menu) {
   case 'create':
-    new _Chap2_Task_add__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    new _Chap2_Datatable_create__WEBPACK_IMPORTED_MODULE_0__["default"]();
     break;
 
   case 'list':
-    new _Chap2_Task_delete__WEBPACK_IMPORTED_MODULE_1__["default"]();
-    new _Chap2_Task_alert__WEBPACK_IMPORTED_MODULE_4__["default"]();
-    break;
-
-  case 'detail':
-    new _Chap2_Task_view__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    new _Chap2_Task_delete__WEBPACK_IMPORTED_MODULE_8__["default"]();
+    new _Chap2_Task_alert__WEBPACK_IMPORTED_MODULE_6__["default"]();
+    new TaskGet();
     break;
 
   case 'edit':
-    new _Chap2_Task_view__WEBPACK_IMPORTED_MODULE_2__["default"]();
-    new _Chap2_Task_update__WEBPACK_IMPORTED_MODULE_3__["default"]();
+    new _Chap2_Datatable_detail__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    new _Chap2_Datatable_update__WEBPACK_IMPORTED_MODULE_5__["default"]();
+    break;
+
+  case 'task':
+    new _Chap2_Datatable_get__WEBPACK_IMPORTED_MODULE_3__["default"]();
+    new _Chap2_Datatable_notif__WEBPACK_IMPORTED_MODULE_4__["default"]();
+    new _Chap2_Datatable_delete__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    break;
+
+  case 'detail':
+    new _Chap2_Datatable_detail__WEBPACK_IMPORTED_MODULE_1__["default"]();
     break;
 }
 

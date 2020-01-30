@@ -1,9 +1,11 @@
 {
-    "/js/Chap2/Task/add.js": "/js/Chap2/Task/add.js",
-    "/js/Chap2/Task/alert.js": "/js/Chap2/Task/alert.js",
-    "/js/Chap2/Task/delete.js": "/js/Chap2/Task/delete.js",
-    "/js/Chap2/Task/update.js": "/js/Chap2/Task/update.js",
-    "/js/Chap2/Task/view.js": "/js/Chap2/Task/view.js",
+    "/js/Chap2/Datatable/coba.js": "/js/Chap2/Datatable/coba.js",
+    "/js/Chap2/Datatable/create.js": "/js/Chap2/Datatable/create.js",
+    "/js/Chap2/Datatable/delete.js": "/js/Chap2/Datatable/delete.js",
+    "/js/Chap2/Datatable/detail.js": "/js/Chap2/Datatable/detail.js",
+    "/js/Chap2/Datatable/get.js": "/js/Chap2/Datatable/get.js",
+    "/js/Chap2/Datatable/notif.js": "/js/Chap2/Datatable/notif.js",
+    "/js/Chap2/Datatable/update.js": "/js/Chap2/Datatable/update.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css"
 }

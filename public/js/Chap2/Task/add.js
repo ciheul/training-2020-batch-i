@@ -119,6 +119,7 @@ function () {
         var title = $("input[name=title]").val();
         var body = $("#body").val();
         var status = $("#status").val();
+        console.log('ini create');
         $.ajax({
           type: 'POST',
           url: '/chap2/task/apis',
@@ -131,8 +132,8 @@ function () {
             status: status
           },
           success: function success(data) {
-            // alert(data.success);
-            window.location.href = "/chap2/task/list?created";
+            alert(data.success);
+            window.location.href = "/chap2/task?created";
           }
         });
       });

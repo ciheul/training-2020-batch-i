@@ -81,94 +81,78 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/Chap2/Task/update.js":
-/*!*******************************************!*\
-  !*** ./resources/js/Chap2/Task/update.js ***!
-  \*******************************************/
+/***/ "./resources/js/Chap2/Datatable/delete.js":
+/*!************************************************!*\
+  !*** ./resources/js/Chap2/Datatable/delete.js ***!
+  \************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TaskUpdate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataTableDelete; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var TaskUpdate =
+var DataTableDelete =
 /*#__PURE__*/
 function () {
-  function TaskUpdate() {
-    _classCallCheck(this, TaskUpdate);
+  function DataTableDelete() {
+    _classCallCheck(this, DataTableDelete);
 
-    this.btnAlertExit();
-    this.bindButton();
+    this.btnDelete();
   }
 
-  _createClass(TaskUpdate, [{
-    key: "bindButton",
-    value: function bindButton() {
-      console.log('ini button update');
-      $('.message').hide();
-      $('.btn-submit-edit').click(function (e) {
-        e.preventDefault();
-        var id = $("input[name=id]").val();
-        var title = $("input[name=title]").val();
-        var body = $(".data-body").val();
-        var status = $("#status").val(); // console.log(id);
-
+  _createClass(DataTableDelete, [{
+    key: "btnDelete",
+    value: function btnDelete() {
+      var menu = window.location.pathname.split("/").pop();
+      $(document).on('click', '.btn-delete', function (e) {
+        var id = $(this).data('id');
+        console.log(id);
         $.ajax({
-          type: 'POST',
-          url: '/chap2/task/apis',
+          type: 'DELETE',
+          url: '/api/chap2/task/apis/' + id + "/delete",
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
           data: {
-            id: id,
-            title: title,
-            body: body,
-            status: status
+            id: id
           },
-          success: function success(data) {
-            // $('.message').show()
-            // $('.message').append(data.success);
-            // $(".close.icon").click(function(){
-            window.location.href = "/chap2/task?updated"; // });
+          success: function success(response) {
+            window.location.href = "/chap2/task?deleted";
+          },
+          error: function error() {
+            alert('data tidak ditermukan');
           }
         });
       });
     }
-  }, {
-    key: "btnAlertExit",
-    value: function btnAlertExit() {
-      $(".close.icon").click(function () {
-        $(this).parent().hide();
-      });
-    }
   }]);
 
-  return TaskUpdate;
+  return DataTableDelete;
 }();
 
 
 
 /***/ }),
 
-/***/ 3:
-/*!*************************************************!*\
-  !*** multi ./resources/js/Chap2/Task/update.js ***!
-  \*************************************************/
+/***/ 5:
+/*!******************************************************!*\
+  !*** multi ./resources/js/Chap2/Datatable/delete.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ciheul/Projects/www/training-2020-batch-i/resources/js/Chap2/Task/update.js */"./resources/js/Chap2/Task/update.js");
+module.exports = __webpack_require__(/*! /home/ciheul/Projects/www/training-2020-batch-i/resources/js/Chap2/Datatable/delete.js */"./resources/js/Chap2/Datatable/delete.js");
 
 
 /***/ })

@@ -42,20 +42,20 @@
           </div>
       </div>
 
-      <div class="ui relaxed divided list">
-        @foreach ($tasks as $task)
-        <div class="item">
-          <div class="content">
+      <div class="ui relaxed divided list ">
+
+        <div class="item list-data-task">
+          <!-- <div class="content">
             <div class="ui two column stackable grid">
               <div class="ten wide column">
-                  <a href="/chap2/task/{{$task->id}}/detail" class="header"> {{ $task->title }}</a>
+                  <a href="/chap2/task/id/detail" class="header"> title </a>
               </div>
               <div class="six wide column">
 
                  <div class="ui small basic icon right floated buttons">
-                  <button class="ui button btn-delete" data-id="{{$task->id}}"><i class="trash alternate icon"></i></button>
-                  <a href="/chap2/task/{{$task->id}}/detail" class="ui button"><i class="eye icon"></i> </a>
-                  <a href="/chap2/task/{{$task->id}}/edit" class="ui button"><i class="edit icon"></i></a>
+                  <button class="ui button btn-delete" data-id="/id"><i class="trash alternate icon"></i></button>
+                  <a href="/chap2/task/id/detail" class="ui button"><i class="eye icon"></i> </a>
+                  <a href="/chap2/task/id/edit" class="ui button"><i class="edit icon"></i></a>
 
                 </div>
 
@@ -63,13 +63,13 @@
           </div>
 
 
-        </div>
+        </div> -->
 
       </div>
 
 
 
-      @endforeach
+
     </div>
   </div>
 </div>

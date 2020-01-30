@@ -27,7 +27,7 @@ export default class TaskUpdate {
             // $('.message').show()
             // $('.message').append(data.success);
             // $(".close.icon").click(function(){
-              window.location.href = "/chap2/task/list?updated";
+              window.location.href = "/chap2/task?updated";
             // });
         },
 

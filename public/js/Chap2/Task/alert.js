@@ -131,11 +131,14 @@ function () {
       var params_alert = window.location.href.split('?');
 
       if (params_alert[1] == 'deleted') {
-        // console.log(params_alert[1])
         $('.deleted').show();
-      } else if (params_alert[1] == 'updated') {
+      }
+
+      if (params_alert[1] == 'updated') {
         $('.updated').show();
-      } else if (params_alert[1] == 'created') {
+      }
+
+      if (params_alert[1] == 'created') {
         $('.created').show();
       }
     }

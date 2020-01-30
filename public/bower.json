@@ -12,6 +12,9 @@
     "tests"
   ],
   "dependencies": {
-    "semantic": "semantic-ui#^2.4.1"
+    "semantic": "semantic-ui#^2.4.1",
+    "datatables.net": "^1.10.20",
+    "datatables.net-dt": "^3.2.2",
+    "moment": "^2.24.0"
   }
 }

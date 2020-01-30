@@ -17,7 +17,8 @@
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
     <link href="{{asset('bower_components/semantic/dist/semantic.min.css')}}" rel="stylesheet">
     <link href="{{asset('bower_components/semantic/dist/semantic.css')}}" rel="stylesheet">
-
+    <link href="{{asset('bower_components/datatables.net-dt/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('bower_components/daterangepicker/demo/css/daterangepicker.css')}}" rel="stylesheet" type="text/css">
 
     <style>
       body {
@@ -64,10 +65,9 @@
     <div class="ui fixed secondary pointing menu" id="top-nav">
       <div class="menu">
         <a class="item" href="#" style="padding-left: 0; width: 220px">
-
           <div id="unit-name">Chapter 2</div>
         </a>
-        <a href="/chap2/task/list"
+        <a href="/chap2/task"
            class="@yield('isActiveTaskList') item menu-item">
           <i class="table icon"></i> Task
         </a>
@@ -77,7 +77,6 @@
         </a>
       </div>
       <div class="right menu">
-
         <div id="other-menu-dropdown" class="ui dropdown icon item menu-item">
           <i class="bars icon"></i>
           <div class="menu">
@@ -89,37 +88,22 @@
 
     @yield('content')
 
-   <!--  <div id="bottom-nav">
-      <div class="ui center aligned three column grid">
-        <div class="column">
-          <a href="/hcm/dashboard">
-            <i class="table large @yield('isActiveDashboardResponsiveMenu') icon" style="margin-top: -3px; color: lightgrey"></i>
-          </a>
-        </div>
-        <div class="column">
-          <a href="/hcm/okr/list">
-            <i class="briefcase large @yield('isActiveOkrResponsiveMenu') icon" style="margin-top: -3px; color: lightgrey"></i>
-          </a>
-        </div>
-        <div class="column">
-          <a href="/hcm/notification">
-            <i class="bell large @yield('isActiveNotifResponsiveMenu') icon" style="margin-top: -3px; color: lightgrey"></i>
-          </a>
-        </div>
-      </div>
-    </div> -->
-
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js')}}"></script>
 
-    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
 
-    <script type="{{ asset('bower_components/semantic/dist/semantic.js')}}"></script>
-    <script type="{{ asset('bower_components/semantic/dist/semantic.min.js')}}"></script>
-    <script type="{{ asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
-    <script type="{{ asset('bower_components/jquery/dist/jquery.js')}}"></script>
+    <script src="{{ asset('bower_components/semantic/dist/semantic.js')}}"></script>
+    <script src="{{ asset('bower_components/semantic/dist/semantic.min.js')}}"></script>
+    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('bower_components/jquery/dist/jquery.js')}}"></script>
+    <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.js')}}"></script>
+    <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+
+    <script src="{{ asset('bower_components/moment/moment.js')}}"></script>
+    <script src="{{ asset('bower_components/daterangepicker/lib/daterangepicker/daterangepicker.min.js')}}"></script>
 
     @yield('javascript')
 
-    </body>
+  </body>
 </html>

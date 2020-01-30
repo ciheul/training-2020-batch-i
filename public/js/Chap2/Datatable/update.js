@@ -86,37 +86,34 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/Chap2/Task/update.js":
-/*!*******************************************!*\
-  !*** ./resources/js/Chap2/Task/update.js ***!
-  \*******************************************/
+/***/ "./resources/js/Chap2/Datatable/update.js":
+/*!************************************************!*\
+  !*** ./resources/js/Chap2/Datatable/update.js ***!
+  \************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TaskUpdate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataTableUpdate; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var TaskUpdate =
+var DataTableUpdate =
 /*#__PURE__*/
 function () {
-  function TaskUpdate() {
-    _classCallCheck(this, TaskUpdate);
+  function DataTableUpdate() {
+    _classCallCheck(this, DataTableUpdate);
 
-    this.btnAlertExit();
-    this.bindButton();
+    this.putUpdate();
   }
 
-  _createClass(TaskUpdate, [{
-    key: "bindButton",
-    value: function bindButton() {
-      console.log('ini button update');
-      $('.message').hide();
+  _createClass(DataTableUpdate, [{
+    key: "putUpdate",
+    value: function putUpdate() {
       $('.btn-submit-edit').click(function (e) {
         e.preventDefault();
         var id = $("input[name=id]").val();
@@ -125,8 +122,8 @@ function () {
         var status = $("#status").val(); // console.log(id);
 
         $.ajax({
-          type: 'POST',
-          url: '/chap2/task/apis',
+          type: 'PUT',
+          url: '/api/chap2/task/apis/' + id + "/update",
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
@@ -136,25 +133,15 @@ function () {
             body: body,
             status: status
           },
-          success: function success(data) {
-            // $('.message').show()
-            // $('.message').append(data.success);
-            // $(".close.icon").click(function(){
-            window.location.href = "/chap2/task?updated"; // });
+          success: function success(response) {
+            window.location.href = "/chap2/task?updated";
           }
         });
       });
     }
-  }, {
-    key: "btnAlertExit",
-    value: function btnAlertExit() {
-      $(".close.icon").click(function () {
-        $(this).parent().hide();
-      });
-    }
   }]);
 
-  return TaskUpdate;
+  return DataTableUpdate;
 }();
 
 
@@ -162,13 +149,13 @@ function () {
 /***/ }),
 
 /***/ 3:
-/*!*************************************************!*\
-  !*** multi ./resources/js/Chap2/Task/update.js ***!
-  \*************************************************/
+/*!******************************************************!*\
+  !*** multi ./resources/js/Chap2/Datatable/update.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ciheul/Projects/www/training-2020-batch-i/resources/js/Chap2/Task/update.js */"./resources/js/Chap2/Task/update.js");
+module.exports = __webpack_require__(/*! /home/ciheul/Projects/www/training-2020-batch-i/resources/js/Chap2/Datatable/update.js */"./resources/js/Chap2/Datatable/update.js");
 
 
 /***/ })

@@ -81,94 +81,81 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/Chap2/Task/update.js":
-/*!*******************************************!*\
-  !*** ./resources/js/Chap2/Task/update.js ***!
-  \*******************************************/
+/***/ "./resources/js/Chap2/Datatable/detail.js":
+/*!************************************************!*\
+  !*** ./resources/js/Chap2/Datatable/detail.js ***!
+  \************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TaskUpdate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataTableDetail; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var TaskUpdate =
+var DataTableDetail =
 /*#__PURE__*/
 function () {
-  function TaskUpdate() {
-    _classCallCheck(this, TaskUpdate);
+  function DataTableDetail() {
+    _classCallCheck(this, DataTableDetail);
 
-    this.btnAlertExit();
-    this.bindButton();
+    this.getDetail();
   }
 
-  _createClass(TaskUpdate, [{
-    key: "bindButton",
-    value: function bindButton() {
-      console.log('ini button update');
-      $('.message').hide();
-      $('.btn-submit-edit').click(function (e) {
-        e.preventDefault();
-        var id = $("input[name=id]").val();
-        var title = $("input[name=title]").val();
-        var body = $(".data-body").val();
-        var status = $("#status").val(); // console.log(id);
-
-        $.ajax({
-          type: 'POST',
-          url: '/chap2/task/apis',
+  _createClass(DataTableDetail, [{
+    key: "getDetail",
+    value: function getDetail() {
+      $(document).ready(function (e) {
+        $.ajaxSetup({
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        var id = $('#task_id').val();
+        var menu = window.location.pathname.split("/").pop();
+        $.ajax({
+          url: "/api/chap2/task/apis" + '/' + id,
+          type: "GET",
+          dataType: "JSON",
+          success: function success(response) {
+            $('.data-title').text(response.data.title);
+            $('.data-title').val(response.data.title);
+            $('.data-body').text(response.data.body); // $('.data-status').text(response.data.status);
+
+            $('#status').val(response.data.status);
           },
-          data: {
-            id: id,
-            title: title,
-            body: body,
-            status: status
-          },
-          success: function success(data) {
-            // $('.message').show()
-            // $('.message').append(data.success);
-            // $(".close.icon").click(function(){
-            window.location.href = "/chap2/task?updated"; // });
+          error: function error() {
+            alert('data tidak ditermukan');
           }
         });
       });
     }
-  }, {
-    key: "btnAlertExit",
-    value: function btnAlertExit() {
-      $(".close.icon").click(function () {
-        $(this).parent().hide();
-      });
-    }
   }]);
 
-  return TaskUpdate;
+  return DataTableDetail;
 }();
 
 
 
 /***/ }),
 
-/***/ 3:
-/*!*************************************************!*\
-  !*** multi ./resources/js/Chap2/Task/update.js ***!
-  \*************************************************/
+/***/ 2:
+/*!******************************************************!*\
+  !*** multi ./resources/js/Chap2/Datatable/detail.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ciheul/Projects/www/training-2020-batch-i/resources/js/Chap2/Task/update.js */"./resources/js/Chap2/Task/update.js");
+module.exports = __webpack_require__(/*! /home/ciheul/Projects/www/training-2020-batch-i/resources/js/Chap2/Datatable/detail.js */"./resources/js/Chap2/Datatable/detail.js");
 
 
 /***/ })

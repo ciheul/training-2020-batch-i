@@ -1,4 +1,4 @@
-export default class TaskAlert {
+export default class DatatableNotif {
   constructor() {
     this.defaultAlert();
     this.exitAlert();
@@ -8,7 +8,6 @@ export default class TaskAlert {
   defaultAlert(){
 
     $('.message').hide()
-
 
   }
 
@@ -23,12 +22,12 @@ export default class TaskAlert {
     let params_alert =  window.location.href.split('?');
 
     if(params_alert[1] == 'deleted') {
-        $('.deleted').show()
-      }
+      $('.deleted').show()
+    }
 
     if(params_alert[1] == 'updated') {
-        $('.updated').show()
-      }
+      $('.updated').show()
+    }
 
     if(params_alert[1] == 'created') {
       $('.created').show()
@@ -36,3 +35,4 @@ export default class TaskAlert {
 
   }
 }
+

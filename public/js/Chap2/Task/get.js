@@ -81,94 +81,76 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/Chap2/Task/update.js":
-/*!*******************************************!*\
-  !*** ./resources/js/Chap2/Task/update.js ***!
-  \*******************************************/
+/***/ "./resources/js/Chap2/Task/get.js":
+/*!****************************************!*\
+  !*** ./resources/js/Chap2/Task/get.js ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TaskUpdate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TaskGet; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var TaskUpdate =
+var TaskGet =
 /*#__PURE__*/
 function () {
-  function TaskUpdate() {
-    _classCallCheck(this, TaskUpdate);
+  function TaskGet() {
+    _classCallCheck(this, TaskGet);
 
-    this.btnAlertExit();
-    this.bindButton();
+    this.getAjax();
   }
 
-  _createClass(TaskUpdate, [{
-    key: "bindButton",
-    value: function bindButton() {
-      console.log('ini button update');
-      $('.message').hide();
-      $('.btn-submit-edit').click(function (e) {
-        e.preventDefault();
-        var id = $("input[name=id]").val();
-        var title = $("input[name=title]").val();
-        var body = $(".data-body").val();
-        var status = $("#status").val(); // console.log(id);
+  _createClass(TaskGet, [{
+    key: "getAjax",
+    value: function getAjax() {
+      $.ajax({
+        url: '/chap2/task/apis',
+        type: "GET",
+        dataType: "JSON",
+        success: function success(response) {
+          var max_length = Object.keys(response.data).length; // var a = JSON.parse(response)
 
-        $.ajax({
-          type: 'POST',
-          url: '/chap2/task/apis',
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          data: {
-            id: id,
-            title: title,
-            body: body,
-            status: status
-          },
-          success: function success(data) {
-            // $('.message').show()
-            // $('.message').append(data.success);
-            // $(".close.icon").click(function(){
-            window.location.href = "/chap2/task?updated"; // });
+          var i;
+
+          for (i = 0; i < max_length; i++) {
+            console.log(i, response.data[i].id, response.data[i].title, response.data[i].body, response.data[i].status);
+            var title = response.data[i].title;
+            $('.list-data-task').append('<div class="content">' + '<div class="ui two column stackable grid">' + '<div class="ten wide column">' + '<a href="/chap2/task/id/detail" class="header"> ' + title + '</a>' + '</div>' + '<div class="six wide column">' + '<div class="ui small basic icon right floated buttons">' + '<button class="ui button btn-delete" data-id="/id"><i class="trash alternate icon"></i></button>' + '<a href="/chap2/task/id/detail" class="ui button"><i class="eye icon"></i> </a>' + '<a href="/chap2/task/id/edit" class="ui button"><i class="edit icon"></i></a>' + '</div>' + '</div>' + '</div>' + '</div>');
           }
-        });
-      });
-    }
-  }, {
-    key: "btnAlertExit",
-    value: function btnAlertExit() {
-      $(".close.icon").click(function () {
-        $(this).parent().hide();
+        },
+        error: function error() {
+          console.log('error');
+        }
       });
     }
   }]);
 
-  return TaskUpdate;
+  return TaskGet;
 }();
 
 
 
 /***/ }),
 
-/***/ 3:
-/*!*************************************************!*\
-  !*** multi ./resources/js/Chap2/Task/update.js ***!
-  \*************************************************/
+/***/ 6:
+/*!**********************************************!*\
+  !*** multi ./resources/js/Chap2/Task/get.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ciheul/Projects/www/training-2020-batch-i/resources/js/Chap2/Task/update.js */"./resources/js/Chap2/Task/update.js");
+module.exports = __webpack_require__(/*! /home/ciheul/Projects/www/training-2020-batch-i/resources/js/Chap2/Task/get.js */"./resources/js/Chap2/Task/get.js");
 
 
 /***/ })

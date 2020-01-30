@@ -1,10 +1,12 @@
 <?php
+Route::get('/chap2/task','Chap2\Views\TaskDatatable@get');
+Route::get('/chap2/task/{id}/detail','Chap2\Views\TaskDetail@get');
+Route::get('/chap2/task/{id}/edit','Chap2\Views\TaskEdit@get');
+Route::get('/chap2/task/create','Chap2\Views\TaskListController@post');
 
 
-Route::get('/', function () {
-    return redirect('chap2/task/list');
-});
-
+Route::get('/', function () { return redirect('chap2/task'); });
+Route::get('/chap2/coba', function () { return view('Chap2.Datatable.coba'); });
 
 //Chap 1 Task
 Route::get('/chap1/task/list','Chap1\Views\TaskListController@index')->name('chap1.task.index');
@@ -27,12 +29,19 @@ Auth::routes();
 
 //Chap 2 Task
 //views
-Route::get('/chap2/task/list','Chap2\Views\TaskListController@get');
-Route::get('/chap2/task/create','Chap2\Views\TaskListController@post');
-Route::get('/chap2/task/{id}/detail','Chap2\Views\TaskViewController@get');
-Route::get('/chap2/task/{id}/edit','Chap2\Views\TaskEditController@get');
+// Route::get('/chap2/task/list','Chap2\Views\TaskListController@get');
 
-Route::post('/chap2/task/apis','Chap2\Apis\TaskController@post');
-Route::get('/chap2/task/apis/{id}','Chap2\Apis\TaskController@get');
-Route::delete('/chap2/task/apis/{id}','Chap2\Apis\TaskController@delete');
-Route::post('/chap2/task/apis/update','Chap2\Apis\TaskController@put');
+// Route::get('/chap2/task/{id}/detail','Chap2\Views\TaskViewController@get');
+
+
+// Route::get('/chap2/task/apis','Chap2\Apis\TaskList@get');
+
+// Route::get('/chap2/task/apis/{id}','Chap2\Apis\TaskController@get');
+// Route::delete('/chap2/task/apis/{id}','Chap2\Apis\TaskController@delete');
+// Route::post('/chap2/task/apis/update','Chap2\Apis\TaskController@put');
+
+
+//Chap2 Datatable
+
+
+
