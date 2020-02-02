@@ -6,24 +6,23 @@ export default class DataTableGet {
   }
 
   getDataList(){
-    let title = '';
-    let status = '';
     let body = '';
-    let limit = 50;
-    let page = 1;
-    let from_date = '';
-    let to_date = '';
-    let params;
-    let data_json;
-    let paramsList;
-    let no_page = 1;
-    let last_page;
     let current_page;
+    let data_json;
+    let from_date = '';
+    let last_page;
+    let limit = 50;
+    let no_page = 1;
+    let page = 1;
+    let params;
+    let paramsList;
+    let status = '';
+    let title = '';
+    let to_date = '';
 
     function extraparams(){
       var currentUrl = window.location.href;
-      // console.log('extra');
-      if (currentUrl.indexOf('?') < 0) {
+        if (currentUrl.indexOf('?') < 0) {
         return {};
       }
       currentUrl = currentUrl.replace('#', '');
@@ -36,43 +35,32 @@ export default class DataTableGet {
     
       if(page == undefined ){
         page =  paramsList[0].split('=')[1];
-        //console.log('page',page);
       }
       
       if($('#title').val() == "" ){
         title = paramsList[1].split('=')[1];
-        //console.log('title',title);
       }
       if($('#body').val() == "" ){
         body = paramsList[3].split('=')[1];
-        //console.log('body', body);
       }
       if($('#status').val() == "" ){
         status = paramsList[2].split('=')[1];
-        //console.log('status',status);
       }
       if(from_date == undefined ){
         from_date = paramsList[5].split('=')[1];
-        //console.log('from',from_date);
       }
 
       if(to_date == undefined ){
         to_date = paramsList[6].split('=')[1];
-        //console.log('to',to_date);
       }
 
       if(limit == undefined ){
-
         limit = paramsList[4].split('=')[1];
-        // console.log('limit', 12);
-      }else{
-        // console.log('limit', 12);
       }
-      // console.log('to',to_date);
     }
+
     //mulai 
     $(document).ready(function(){
-
       extraparams(page ,title, status, body, limit, from_date, to_date);
       rangeDate();
       getajax();    
@@ -154,7 +142,6 @@ export default class DataTableGet {
           data_json = json.data;
           last_page = json.data.last_page;
           current_page = json.data.current_page;
-          console.log(data_json);
 
           document.getElementById("btn_next").disabled = true;
           if(data_json.next_page_url != null){
@@ -182,7 +169,6 @@ export default class DataTableGet {
           var page_from = path_data[5][1];
           var page_to = path_data[6][1];
           var page_limit = path_data[4][1];
-          console.log(page_limit);
 
           if( (page_data != 1  && page_limit != 50) || page_title != "" || page_body != "" || page_status != "" || page_from != "" ){
             window.history.pushState("","","/chap2/task?"+ path_url[1]);
