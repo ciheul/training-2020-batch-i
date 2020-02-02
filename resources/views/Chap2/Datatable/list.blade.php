@@ -127,11 +127,21 @@
             </tr>
           </thead>
         </table>
+        <div class="ui icon buttons right floated" style="margin-top:15px">
+          <button id="btn_prev" class="ui button">
+            <i class="left chevron icon"></i>
+          </button>
+          <button class="ui button">
+            <i id="no_page" class=""> 1 </i>
+          </button>
+          <button id="btn_next" class="ui button">
+            <i class="right chevron icon"></i>
+          </button>
+        </div>
       </div>
     </div>
      <div class="thirteen wide column">
         <div class="ui grid">
-          <!-- sorting dan jumlah row -->
           <div class="thirteen wide column">
             <div class="field sort-container" style="float:right;margin-left:20px;">
               <strong style="margin-right: 10px">Urutkan: </strong>
