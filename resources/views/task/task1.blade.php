@@ -12,6 +12,7 @@
 <link href="{{asset('bower_components/semantic/dist/semantic.css')}}" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
     	input[type=text] {
   			width: 100%;

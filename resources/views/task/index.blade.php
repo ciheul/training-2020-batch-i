@@ -82,15 +82,7 @@
 
                     <a href="/Chapter1/task/create/">Create</a><br>
                     <a href="/Chapter1/task/show/">Show & Edit</a><br>
-                    <!-- 
-                        <div class="ui relaxed divided list">
-                            @foreach ($task as $task)
-                             <div class="item">
-                                <div class="content">
-                                <a href="/Chapter1/task/{{ $task->id }}"></a><br>
                     
-                            @endforeach
-                                </div> -->
                 </div>
             </div>
                    

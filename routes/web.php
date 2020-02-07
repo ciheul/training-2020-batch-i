@@ -11,26 +11,24 @@
 |
 */
 
-// Route::get('Chapter1/task', 'Chapter1\Views\TaskController@index');
+// Chapter 1
  Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
- //Route::resource('/Chapter1/task/','Chapter1\Views\TaskController');
- Route::get('Chapter1/task/','Chapter1\Views\TaskController@index');
- Route::get('Chapter1/task/create','Chapter1\Views\TaskCreate@get');
- Route::post('Chapter1/task/store', 'Chapter1\Views\TaskCreate@post');
- Route::get('Chapter1/task/show','Chapter1\Views\TaskShow@get');
- Route::get('Chapter1/task/test/{id}','Chapter1\Views\TaskView@get');
- Route::get('Chapter1/task/test/{id}/edit','Chapter1\Views\TaskUpdate@get');
- Route::put('Chapter1/task/test/{id}/store','Chapter1\Views\TaskUpdate@put');
- Route::delete('Chapter1/task/test/{id}/delete','Chapter1\Views\TaskUpdate@delete');
+Route::get('Chapter1/task/','Chapter1\Views\TaskController@index');
+Route::get('Chapter1/task/create','Chapter1\Views\TaskCreate@get');
+Route::post('Chapter1/task/store', 'Chapter1\Views\TaskCreate@post');
+Route::get('Chapter1/task/show','Chapter1\Views\TaskShow@get');
+Route::get('Chapter1/task/test/{id}','Chapter1\Views\TaskView@get');
+Route::get('Chapter1/task/test/{id}/edit','Chapter1\Views\TaskUpdate@get');
+Route::put('Chapter1/task/test/{id}/store','Chapter1\Views\TaskUpdate@put');
+Route::delete('Chapter1/task/test/{id}/delete','Chapter1\Views\TaskUpdate@delete');
 
- //Route::post('/Chapter1/task/create','Chapter1\Views\TaskController@store');
+//Chapter 2
+
+Route::get('Chapter2','Chapter2\Views\DataListView@get');
+Route::get('Chapter2/create','Chapter2\Views\CreateView@get');
+Route::get('Chapter2/{id}/edit','Chapter2\Views\UpdateView@get');
+Route::get('Chapter2/test','Chapter2\Views\DummyView@get');
 
 
-//Route::get('Chapter1/task/create','Chapter1/Views/TaskController@create');
-
-// Route::get('/', function () {
-//  return view('welcome');
-// });
 
