@@ -20,6 +20,7 @@ let filter =  window.location.href.split('?');
 if(filter[1] == "filter")
 {
 }
+
 switch (menu) {
 
   case 'create':
@@ -32,5 +33,8 @@ switch (menu) {
   case 'edit':
     new ShowDetail();
     new EditData();
+    break;
+    case 'test':
+    new test;
     break;
 }

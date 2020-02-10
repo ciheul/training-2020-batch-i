@@ -56,7 +56,7 @@ export default class Datalist
 
                 if (!params.hasOwnProperty('limit'))
                 {
-                  params['limit'] = 3;
+                  params['limit'] = 5;
                 }
 
                 return params;
@@ -99,7 +99,7 @@ export default class Datalist
 
                 if (!params.hasOwnProperty('limit'))
                 {
-                  params['limit'] = 3;
+                  params['limit'] = 5;
                 }
                   return params;
               },
@@ -357,9 +357,9 @@ export default class Datalist
 
               renderStatusFilter: function(params)
               {
-                if (params['status'] !== undefined)
+                if (params['status[]'] !== undefined)
                 {
-                  $('#status-dropdown').val(params['status']);
+                  $('#status-dropdown').val(params['status[]']);
                 }
 
                 this.bindStatusFilter();
@@ -369,35 +369,38 @@ export default class Datalist
               {
                 var that = this;
 
-                $(document).on('change','#status-dropdown', function(params)
-                {
-                  var params = that.props.utility.extractParams();
-                  var status = $('#status-dropdown').val();
-                  params = that.checkUrl(params);
-
-                  if ($("#status-dropdown").val() === '' && params.hasOwnProperty('status'))
+                 $('.status').dropdown({
+                  onChange: function()
                   {
-                    delete params['status'];
+                      var params = that.props.utility.extractParams();
+
+                    params = that.checkUrl(params);
+
+                    if ($("#status-dropdown").dropdown('get values') === '' && params.hasOwnProperty('status'))
+                    {
+                      delete params['status'];
+                    }
+
+                    if ($("#status-dropdown").dropdown('get values') === '' && !params.hasOwnProperty('status'))
+                    {
+
+                    }
+
+                    else
+                    {
+                      params['status'] = $('#status-dropdown').dropdown('get values');
+                    }
+
+                    $.get('/api/Chapter2/apis/', params, function(response)
+                    {
+                      console.log(params);
+                      $("#dataListTable").DataTable().clear().destroy();
+                      that.props.dataList.getDataList(params);
+                    });
+
+                    var historyUrl = that.props.utility.buildUrl(window.location.pathname,params);
+                    window.history.pushState('byStatus', 'by Status', historyUrl);
                   }
-
-                  if ($("#status-dropdown").val() === '' && !params.hasOwnProperty('status'))
-                  {
-                            //do nothing
-                  }
-
-                  else
-                  {
-                    params['status'] = $('#status-dropdown').val();
-                  }
-
-                  $.get('/api/Chapter2/apis/', params, function(response)
-                  {
-                    $("#dataListTable").DataTable().clear().destroy();
-                    that.props.dataList.getDataList(params);
-                  });
-
-                  var historyUrl = that.props.utility.buildUrl(window.location.pathname,params);
-                  window.history.pushState('byStatus', 'by Status', historyUrl);
                 });
               },
             };
@@ -416,7 +419,7 @@ export default class Datalist
               {
                 var currentPage = this.props.dataListTable.props.currentPage;
                 var page = 1;
-                var pageSize = 3;
+                var pageSize = 5;
 
                 if (params.hasOwnProperty(limit))
                 {
@@ -461,7 +464,8 @@ export default class Datalist
             {
               render: function(response, cls)
               {
-                var previous;
+
+                //var previous;
                 if (response.data.prev_page_url == null)
                 {
                   $('.page').empty();
@@ -477,7 +481,7 @@ export default class Datalist
                   );
                 }
 
-                var next;
+                //var next;
                 if (response.data.next_page_url == null)
                 {
                   $('.page').empty();
@@ -527,7 +531,7 @@ export default class Datalist
                     '<button class="ui icon button" id="link"><i class="edit outline icon"></i></button>'}
                   ],
 
-                  pageLength: 3,
+                  pageLength: 5,
                   scrollX: false,
                   scrollCollapse: false,
                   paging: false,
@@ -645,7 +649,7 @@ export default class Datalist
                     that.props.dataListTable.render(params, response);
                     var limit = params['limit']
                   });
-
+                  console.log(params);
                   var historyUrl = that.props.utility.buildUrl(window.location.pathname,params);
                   window.history.pushState('RowLimit', 'Row Limit', historyUrl);
                 });
@@ -681,7 +685,7 @@ export default class Datalist
 
                 if (!params.hasOwnProperty('limit'))
                 {
-                  params['limit'] = 3;
+                  params['limit'] = 5;
                 }
 
                 return params;
@@ -696,10 +700,12 @@ export default class Datalist
                 this.props.dataListTable.props.pagination = this.props.pagination;
                 this.bindSortDropdown();
                 this.bindRowDropdown();
+
               },
 
               render: function()
               {
+                console.log('cek');
                 this.initialize();
                 var params = this.props.utility.extractParams();
                 params = this.buildParams(params);
@@ -709,6 +715,7 @@ export default class Datalist
                 this.renderRowDropdown(params);
               }
             };
+
             dataListView.render();
           }
       });

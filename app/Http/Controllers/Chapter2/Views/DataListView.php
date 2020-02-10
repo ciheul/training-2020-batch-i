@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class DataListView extends Controller
 {
-	public function get()
+    public function get()
     {
         return view('chapter2.listview', compact('chapter2'));
     }

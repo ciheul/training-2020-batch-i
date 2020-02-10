@@ -10,11 +10,16 @@
     <title>@yield('title')</title>
 
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
-    <link href="{{asset('bower_components/semantic/dist/semantic.min.css')}}" rel="stylesheet">
-    <link href="{{asset('bower_components/semantic/dist/semantic.css')}}" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{asset('bower_components/datatables.net-dt/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+
+    <head>
+
+
+    </head>
 
     <style>
       body {
@@ -103,10 +108,10 @@
     </div>
 
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}" defer></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
     <!-- Styles -->
     <script src="{{ asset('js/app.js')}}"></script>

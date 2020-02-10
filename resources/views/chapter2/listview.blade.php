@@ -104,13 +104,14 @@
         <div class="ui segments">
           <div class="ui segment">
             <p><b>Status</b></p>
-              <input id="status-hidden" type="hidden" name="status" value="">
-              <select class="ui dropdown" id="status-dropdown">
+
+              <select class="ui selection fluid dropdown status" multiple="" id="status-dropdown">
                 <option  value="">Status</option>
                 <option  value="TODO">TODO</option>
                 <option  value="IN_PROGRESS">INPROGRESS</option>
                 <option  value="DONE">DONE</option>
               </select>
+
           </div>
         </div>
 
@@ -211,4 +212,3 @@
       </div>
   </script>
 </body>
-

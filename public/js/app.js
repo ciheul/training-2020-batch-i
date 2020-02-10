@@ -19411,7 +19411,7 @@ function () {
                 }
 
                 if (!params.hasOwnProperty('limit')) {
-                  params['limit'] = 3;
+                  params['limit'] = 5;
                 }
 
                 return params;
@@ -19442,7 +19442,7 @@ function () {
                 }
 
                 if (!params.hasOwnProperty('limit')) {
-                  params['limit'] = 3;
+                  params['limit'] = 5;
                 }
 
                 return params;
@@ -19620,34 +19620,35 @@ function () {
                 });
               },
               renderStatusFilter: function renderStatusFilter(params) {
-                if (params['status'] !== undefined) {
-                  $('#status-dropdown').val(params['status']);
+                if (params['status[]'] !== undefined) {
+                  $('#status-dropdown').val(params['status[]']);
                 }
 
                 this.bindStatusFilter();
               },
               bindStatusFilter: function bindStatusFilter(params) {
                 var that = this;
-                $(document).on('change', '#status-dropdown', function (params) {
-                  var params = that.props.utility.extractParams();
-                  var status = $('#status-dropdown').val();
-                  params = that.checkUrl(params);
+                $('.status').dropdown({
+                  onChange: function onChange() {
+                    var params = that.props.utility.extractParams();
+                    params = that.checkUrl(params);
 
-                  if ($("#status-dropdown").val() === '' && params.hasOwnProperty('status')) {
-                    delete params['status'];
+                    if ($("#status-dropdown").dropdown('get values') === '' && params.hasOwnProperty('status')) {
+                      delete params['status'];
+                    }
+
+                    if ($("#status-dropdown").dropdown('get values') === '' && !params.hasOwnProperty('status')) {} else {
+                      params['status'] = $('#status-dropdown').dropdown('get values');
+                    }
+
+                    $.get('/api/Chapter2/apis/', params, function (response) {
+                      console.log(params);
+                      $("#dataListTable").DataTable().clear().destroy();
+                      that.props.dataList.getDataList(params);
+                    });
+                    var historyUrl = that.props.utility.buildUrl(window.location.pathname, params);
+                    window.history.pushState('byStatus', 'by Status', historyUrl);
                   }
-
-                  if ($("#status-dropdown").val() === '' && !params.hasOwnProperty('status')) {//do nothing
-                  } else {
-                    params['status'] = $('#status-dropdown').val();
-                  }
-
-                  $.get('/api/Chapter2/apis/', params, function (response) {
-                    $("#dataListTable").DataTable().clear().destroy();
-                    that.props.dataList.getDataList(params);
-                  });
-                  var historyUrl = that.props.utility.buildUrl(window.location.pathname, params);
-                  window.history.pushState('byStatus', 'by Status', historyUrl);
                 });
               }
             };
@@ -19660,7 +19661,7 @@ function () {
               setContext: function setContext(params, response) {
                 var currentPage = this.props.dataListTable.props.currentPage;
                 var page = 1;
-                var pageSize = 3;
+                var pageSize = 5;
 
                 if (params.hasOwnProperty(limit)) {
                   pageSize = params['limit'];
@@ -19696,14 +19697,12 @@ function () {
             };
             var paginationView = {
               render: function render(response, cls) {
-                var previous;
-
+                //var previous;
                 if (response.data.prev_page_url == null) {
                   $('.page').empty();
                   $('.page').append('<button class="ui labeled icon button prev" name="previous" id="previous" disabled="disabled">' + '<i class="left chevron icon"></i>' + 'Previous Page' + '</button>' + '<button class="ui right labeled icon button next" name="next" id="next" >' + 'Next Page' + '<i class="right chevron icon"></i>' + '</button>');
-                }
+                } //var next;
 
-                var next;
 
                 if (response.data.next_page_url == null) {
                   $('.page').empty();
@@ -19748,7 +19747,7 @@ function () {
                     "data": "null",
                     "defaultContent": '<button class = "ui icon button" id="delete" data-id=""><i class="delete icon"></i></button>' + '<button class="ui icon button" id="link"><i class="edit outline icon"></i></button>'
                   }],
-                  pageLength: 3,
+                  pageLength: 5,
                   scrollX: false,
                   scrollCollapse: false,
                   paging: false,
@@ -19841,6 +19840,7 @@ function () {
                     that.props.dataListTable.render(params, response);
                     var limit = params['limit'];
                   });
+                  console.log(params);
                   var historyUrl = that.props.utility.buildUrl(window.location.pathname, params);
                   window.history.pushState('RowLimit', 'Row Limit', historyUrl);
                 });
@@ -19866,7 +19866,7 @@ function () {
                 }
 
                 if (!params.hasOwnProperty('limit')) {
-                  params['limit'] = 3;
+                  params['limit'] = 5;
                 }
 
                 return params;
@@ -19881,6 +19881,7 @@ function () {
                 this.bindRowDropdown();
               },
               render: function render() {
+                console.log('cek');
                 this.initialize();
                 var params = this.props.utility.extractParams();
                 params = this.buildParams(params);
@@ -19949,6 +19950,10 @@ switch (menu) {
   case 'edit':
     new _Chapter2_detail__WEBPACK_IMPORTED_MODULE_2__["default"]();
     new _Chapter2_edit__WEBPACK_IMPORTED_MODULE_4__["default"]();
+    break;
+
+  case 'test':
+    new test();
     break;
 }
 

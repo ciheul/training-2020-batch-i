@@ -25,6 +25,7 @@ class DatalistApi extends Controller
         $maxUpdatedDate = $req->input('maxupdated_at');
         $result = DB::table('chapter2s')
 
+
         ->when($id, function ($query, $id)
         {
             return $query->where('id', 'like','%' . $id . '%');
@@ -42,7 +43,7 @@ class DatalistApi extends Controller
 
         ->when($status, function ($query, $status)
         {
-            return $query->where('status', $status);
+            return $query->whereIn('status', $status);
         })
 
         ->when($minCreatedDate, function ($query, $minCreatedDate)
@@ -79,5 +80,8 @@ class DatalistApi extends Controller
         ->paginate($limit);
 
 		return response()->json([ 'data' => $result ], 200);
+
+
+
     }
 }

@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 class UpdateView extends Controller
 {
-	public function get($id)
-	{
-	   return view("chapter2.updateview", compact(['id']));
-	}
+    public function get($id)
+    {
+        return view("chapter2.updateview", compact(['id']));
+    }
 }

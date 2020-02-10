@@ -28,7 +28,7 @@ Route::delete('Chapter1/task/test/{id}/delete','Chapter1\Views\TaskUpdate@delete
 Route::get('Chapter2','Chapter2\Views\DataListView@get');
 Route::get('Chapter2/create','Chapter2\Views\CreateView@get');
 Route::get('Chapter2/{id}/edit','Chapter2\Views\UpdateView@get');
-Route::get('Chapter2/test','Chapter2\Views\DummyView@get');
+
 
 
 
